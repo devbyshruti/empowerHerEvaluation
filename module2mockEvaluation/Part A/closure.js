@@ -9,3 +9,4 @@ const c=counter();
 console.log(c());
 console.log(c());
 console.log(c());
+

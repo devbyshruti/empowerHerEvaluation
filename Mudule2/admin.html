@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin page</title>
+</head>
+<body>
+    <div class=""></div>
+
+    <div class="sidebar">
+        <h3>Add Fleet</h3>
+        <input type="text" id="regno" placeholder="Vehicle Reg No"><br>
+        <select id="category">
+            <option value="">Select category</option>
+            <option value="Auto">Auto</option>
+            <option value="Truck">Truck</option>
+            <option value="Car">Car</option>
+            <option value="Bus">Bus</option>         
+        </select><br>
+        <input type="text" id="driver" placeholder="Driver Name"><br>
+        <select id="isAvailable">
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+        </select><br>
+
+        <button onclick="addFleet()">Add Fleet</button>
+    </div>
+</body>
+<script>
+    let fleet = [];
+    function addFleet() {
+        let regno= document.getElementById("regno").value.trim();
+        let category= document.getElementById("category").value;
+        let driver = document.getElementById("driver").value.trim();
+        let isAvailable= document.getElementById("isAvailable").value;
+        
+        if (!regno || !category || !driver) {
+            alert("Please fill all required fields");
+            return
+        }
+        let newVehicle = {
+            id: Date.new(),
+            regno,
+            category,
+            driver,
+            isAvailable,
+            image:"https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png"
+
+        };
+        fleet.push(newVehicle);
+        renderFleet();
+        document.getElementById("regno").value="";
+        document.getElementById("category").value="";
+        document.getElementById("driver").value="";
+        document.getElementById("isAvailable").value="Available";
+    }
+
+    function renderFleet() {
+        let container= document.getElementById("fleetContainer");
+        container.innerHtml="";
+        fleet.forEach(vehicle => {
+            container.innerHTML += `
+            <div class="card">
+                <h3>${vehicle.regno}</h3>
+                <p><b>Category:</b>${vehicle.category} </p>
+                <p><b>Driver:</b>${vehicle.driver} </p>
+                <p><b>Status:</b>${vehicle.isAvailable} </p>
+                <img src="${vehicle.image}">
+
+                <button class="updatebtn" onclick="updateDriver(${vehicle.id})">Update Driver</button>
+                <button class="availbtn" onclick="toggleAvailabilty(${vehicle.id})">Change Availability</button>
+                <button class="deletebtn" onclick="updateDriver(${vehicle.id})">Delete Vehicle</button>
+                
+             </div>
+             `;
+        });
+    }
+     
+</script>
+</html>
