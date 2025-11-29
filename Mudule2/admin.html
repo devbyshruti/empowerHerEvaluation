@@ -76,6 +76,28 @@
              `;
         });
     }
-     
+     function updateDriver(id) {
+        let newDriver = prompt("Enter New Driver Name:");
+       if(!newDriver) return;
+
+        fleet = fleet.map(v =>
+            v.id === id ? {...v, driver: newDriver}:v
+        );
+        renderFleet();
+     }
+
+        function toggleAvailabilty(id) {
+            fleet = fleet.map(v =>
+            v.id === id ? {...v, isAvailable: v.isAvailable ==="Available" ? "Unavailable":"Available"}:v
+        );
+     renderFleet();
+        }
+        function deleteVehicle(id){
+            fleet = fleet.filter(v => v.id !== id);
+            renderFleet();
+        
+        };
+
+        
 </script>
 </html>
